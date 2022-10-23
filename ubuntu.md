@@ -234,7 +234,7 @@ du -hsc *
 
 ### NCurses Disk Usage - a curses-based version of the 'du'.
 ```
-ncdu 
+ncdu
 ```
 
 ### List block devices.
@@ -663,6 +663,34 @@ ansible-pull -o -U <git repo url e.g. "https://github.com/myusername/ansible.git
 egrep -c '(vmx|svm)' /proc/cpuinfo
 
 # Supported if the result is 1 or more.
+```
+
+## QEMU
+
+### Create a disk image for a vm
+```
+qemu-img create -f <file_format e.g. "qcow2"> <image_name e.g. "test-img.qcow2"> <image_size e.g. "5G">
+```
+### Install an OS in a disk image
+```
+qemu-system-x86_64 -cdrom <iso_image_path> -enable-kvm -m <RAM size e.g. "2M"> -smp <number_of_cores e.g. "2"> -drive file=<disk_image_path>
+```
+
+### Run a vm without an installation media attached
+```
+qemu-system-x86_64 -enable-kvm -m <RAM size e.g. "2M"> -smp <number_of_cores e.g. "2"> -drive file=<disk_image_path>
+```
+
+## Libguestfs
+
+### Mount a guest filesystem on the host
+```
+sudo guestmount -a <disk_image_path> -m <partition> <mount_point e.g. "/mnt">
+```
+
+### Unmount a guest filesystem
+```
+sudo guestunmount <mount_point e.g. "/mnt">
 ```
 
 
